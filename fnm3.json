@@ -1,0 +1,116 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "finenomore",
+    "version": "1.0.0",
+    "contact": {}
+  },
+  "servers": [
+    {
+      "url": "https://finenomore.ssdlc.online"
+    }
+  ],
+  "components": {
+    "schemas": {
+      "Search": {
+        "type": "object",
+        "properties": {
+          "number": {
+            "type": "string",
+            "description": "Plate number",
+            "example": "a111aa"
+          }
+        },
+        "xml": {
+          "name": "order"
+        }
+      }
+    }
+  },
+  "paths": {
+    "/": {
+      "get": {
+        "summary": "Main",
+        "description": "Main page",
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/number/": {
+      "get": {
+        "summary": "Result",
+        "description": "Result",
+        "parameters": [
+          {
+            "name": "n",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "example": "a111aa"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/status/": {
+      "get": {
+        "summary": "Status",
+        "description": "App status",
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/api/search/": {
+      "post": {
+        "summary": "Search by number",
+        "description": "Search by number",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Search"
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/Search"
+              }
+            },
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "$ref": "#/components/schemas/Search"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Search"
+                }
+              }
+            }
+          },
+          "405": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    }
+  },
+  "tags": []
+}
